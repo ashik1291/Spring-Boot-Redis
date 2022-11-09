@@ -1,0 +1,46 @@
+Prerequisites
+
+A system running Ubuntu 20.04 (or Ubuntu 18.04)
+Access to a terminal window/command line
+Sudo or root privileges on local /remote machines
+
+Install and Secure Redis on Ubuntu
+The following steps explain how to install Redis on Ubuntu 20.04. You can also use this guide on Ubuntu 18.04.
+
+Apart from installing and setting up the basic configuration, the guide covers how to add password authentication, bind Redis to localhost and rename dangerous commands.
+
+Step 1: Install Redis
+Follow the steps outlined below to install and configure Redis on your Ubuntu system.
+
+1. Start by updating the package repository:
+	
+	sudo apt update
+	
+2. Then, install Redis with the command:
+
+	sudo apt install redis-server
+	
+Step 2: Configure Redis
+1. Once the installation is complete, modify the Redis configuration file. To do so, open the file with a text editor of your choice (we are using nano):
+
+	sudo nano /etc/redis/redis.conf
+
+2. Next, find the line specifying the supervised directive. By default, this line is set to no. However, to manage Redis as a service, set the supervised directive to systemd (Ubuntu’s init system).
+
+	supervised systemd instead of supervised no
+	
+3. Save the changes and close the file.
+
+4. Finally, restart the Redis service by running:
+
+	sudo systemctl restart redis.service
+
+Step 3: Verify Redis Installation
+To ensure you have set up Redis correctly, test if the service is running. Also, test the connection to the server, and whether you can set a key-value pair.
+
+Step 3.1: Check Redis Service Status
+Check the status of the Redis service by running the command:
+
+	sudo systemctl status redis
+
+The output should display the service is active (and running), as in the image below.	
